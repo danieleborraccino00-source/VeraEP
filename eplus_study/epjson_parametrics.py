@@ -1,4 +1,11 @@
-"""epJSON helpers for the EnergyPlus parametric study workflow."""
+"""
+epJSON helpers for the EnergyPlus parametric study workflow.
+
+Based on work by: Daniele Borraccino <borraccino1@phd.poliba.it>
+Adapted by: Sanjay Somanath <sanjay.somanath@chalmers.se>
+
+License: MIT
+"""
 
 import json
 import os

@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Phase 1: generate the LHS matrix, zone mapping, and epJSON cache."""
+"""
+Phase 1: generate the LHS matrix, zone mapping, and epJSON cache.
+
+Author: Sanjay Somanath <sanjay.somanath@chalmers.se>
+Division of Sustainable Built Environments, Chalmers University of Technology
+
+License: MIT
+"""
 
 import os
 

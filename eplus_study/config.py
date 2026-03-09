@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Shared configuration loader and CLI helpers for the EnergyPlus study."""
+"""
+Shared configuration loader and CLI helpers for the EnergyPlus study.
+
+Author: Sanjay Somanath <sanjay.somanath@chalmers.se>
+Division of Sustainable Built Environments, Chalmers University of Technology
+
+License: MIT
+"""
 
 import argparse
 import json

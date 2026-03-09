@@ -1,4 +1,14 @@
-"""IDF helpers for the EnergyPlus parametric study workflow."""
+"""
+IDF helpers for the EnergyPlus parametric study workflow.
+
+Original parametric functions: Daniele Borraccino <borraccino1@phd.poliba.it>
+Pipeline integration & modifications: Sanjay Somanath <sanjay.somanath@chalmers.se>
+
+Division of Sustainable Built Environments, Chalmers University of Technology
+In collaboration with Politecnico di Bari
+
+License: MIT
+"""
 
 import numpy as np
 import pandas as pd

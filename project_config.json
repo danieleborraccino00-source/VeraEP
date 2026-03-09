@@ -24,7 +24,7 @@
     "download_url": "https://github.com/NREL/EnergyPlus/releases/download/v9.4.0/EnergyPlus-9.4.0-998c4b761e-Linux-Ubuntu18.04-x86_64.tar.gz"
   },
   "slurm": {
-    "account": "C3SE2026-1-13",
+    "account": "C3SE20XX-X-XX",
     "partition": "vera",
     "generate": {
       "job_name": "eplus_gen",

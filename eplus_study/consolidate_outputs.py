@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Phase 3: consolidate batch outputs into the final study artifacts."""
+"""
+Phase 3: consolidate batch outputs into the final study artifacts.
+
+Author: Sanjay Somanath <sanjay.somanath@chalmers.se>
+Division of Sustainable Built Environments, Chalmers University of Technology
+
+License: MIT
+"""
 
 import glob
 import os

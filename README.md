@@ -6,9 +6,36 @@
 ![Config](https://img.shields.io/badge/config-JSON-F59E0B)
 ![Workflow](https://img.shields.io/badge/workflow-batched%20LHS-6B7280)
 
-This repository runs a batched EnergyPlus Latin Hypercube Sampling study on the Vera cluster at C3SE.
+This repository runs a batched EnergyPlus Latin Hypercube Sampling study on the Vera cluster at C3SE. It is set up for reuse: users bring their own IDF and EPW files, local machine-specific settings live in a simple JSON config, and generated study artifacts are kept out of Git.
 
-It is set up for reuse: users bring their own IDF and EPW files, local machine-specific settings live in a simple JSON config, and generated study artifacts are kept out of Git.
+## About This Project
+
+**Project Context**
+
+This work is part of the research project [Renovation strategy support for building portfolios from a life cycle perspective based on machine learning](https://research.chalmers.se/en/project/12229).
+
+**Contributors**
+
+- **Sanjay Somanath** <sanjay.somanath@chalmers.se> - Pipeline development and implementation
+- **Daniele Borraccino** <borraccino1@phd.poliba.it> - Original parametric IDF functions
+- **Alexander Hollberg** <alexander.hollberg@chalmers.se> - Project supervision (Chalmers)
+- **Francesco Fiorito** <francesco.fiorito@poliba.it> - Project supervision (Politecnico di Bari)
+
+**Institutions**
+
+- Division of Sustainable Built Environments, Chalmers University of Technology, Sweden
+- Politecnico di Bari, Italy
+
+**Funding**
+
+This research is funded by the Swedish Energy Agency.
+
+- **Project ID**: P2024-04053
+- **Funding Period**: 2025–2027
+
+**License**
+
+This project is licensed under the MIT License.
 
 ## Repository At A Glance
 

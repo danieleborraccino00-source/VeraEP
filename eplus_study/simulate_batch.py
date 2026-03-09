@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Phase 2: run one worker batch in node-local scratch and write batch outputs."""
+"""
+Phase 2: run one worker batch in node-local scratch and write batch outputs.
+
+Author: Sanjay Somanath <sanjay.somanath@chalmers.se>
+Division of Sustainable Built Environments, Chalmers University of Technology
+
+License: MIT
+"""
 
 import atexit
 import json

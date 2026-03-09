@@ -13,7 +13,7 @@ on the Vera HPC cluster at Chalmers.
 
 ## Prerequisites
 
-1. A SUPR account with access to a compute project on Vera (e.g. `C3SE2026-1-13`).
+1. A SUPR account with access to a compute project on Vera (e.g. `C3SE20XX-X-XX`).
 2. SSH access to `vera1.c3se.chalmers.se` or `vera2.c3se.chalmers.se`.
 
 ## Connecting
@@ -299,7 +299,7 @@ about 30,000 files during the worker phase. This is why `run_study.sh` checks
 ## SLURM Account Details
 
 The default config uses:
-- **Account:** `C3SE2026-1-13`
+- **Account:** `C3SE20XX-X-XX`
 - **Partition:** `vera`
 
 If yours differs, update `slurm.account` and `slurm.partition` in
