@@ -1,0 +1,58 @@
+{
+  "project": {
+    "study_dir": "results",
+    "logs_dir": "logs",
+    "archives_dir": "archives",
+    "venv_dir": "venv",
+    "batch_results_dir": "batch_results",
+    "zone_mapping_path": "zone_mapping.csv",
+    "lhs_parameters_file": "lhs_parameters.csv",
+    "study_results_file": "study_results.csv",
+    "hourly_results_file": "hourly_heating.parquet",
+    "dashboard_file": "dashboard.duckdb",
+    "worker_timings_file": "worker_timings.csv",
+    "worker_batch_timings_file": "worker_batch_timings.csv",
+    "worker_timing_summary_file": "worker_timing_summary.csv"
+  },
+  "inputs": {
+    "idf_path": "idf/your_model.idf",
+    "epw_path": "epw/your_weather.epw"
+  },
+  "energyplus": {
+    "version": "9.4.0",
+    "install_dir": "EnergyPlus-9.4.0-998c4b761e-Linux-Ubuntu18.04-x86_64",
+    "download_url": "https://github.com/NREL/EnergyPlus/releases/download/v9.4.0/EnergyPlus-9.4.0-998c4b761e-Linux-Ubuntu18.04-x86_64.tar.gz"
+  },
+  "slurm": {
+    "account": "C3SE2026-1-13",
+    "partition": "vera",
+    "generate": {
+      "job_name": "eplus_gen",
+      "ntasks": 1,
+      "cpus": 2,
+      "time": "0-00:30:00"
+    },
+    "worker": {
+      "job_name": "eplus_worker",
+      "ntasks": 1,
+      "cpus": 1,
+      "time": "0-02:00:00"
+    },
+    "consolidate": {
+      "job_name": "eplus_db",
+      "ntasks": 1,
+      "cpus": 2,
+      "time": "0-02:00:00"
+    }
+  },
+  "runtime": {
+    "enable_timing": true,
+    "export_dashboard": true,
+    "hourly_batch_rows": 50000,
+    "est_sim_sec": 21,
+    "worker_time_limit_sec": 7200,
+    "worker_time_margin_sec": 600,
+    "home_file_reserve": 5000,
+    "lhs_seed": 42
+  }
+}

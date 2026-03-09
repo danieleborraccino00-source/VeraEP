@@ -1,0 +1,41 @@
+# EnergyPlus installations (large binaries) and tarballs
+EnergyPlus-*/
+*.tar.gz
+
+# User-supplied model and weather inputs
+idf/*
+!idf/.gitkeep
+epw/*
+!epw/.gitkeep
+project_config.local.json
+
+# Virtual environment
+venv/
+
+# Generated study outputs and caches
+results/*
+!results/.gitkeep
+archives/
+
+# IDD (duplicate of EnergyPlus install)
+idd/
+
+# EnergyPlus runtime artifacts
+readvars.audit
+
+# Legacy scripts
+legacy/
+
+# Logs
+logs/
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE / editor
+.vscode-server/
+.vscode/
+
+# OS
+.DS_Store

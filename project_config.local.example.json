@@ -1,0 +1,13 @@
+{
+  "slurm": {
+    "account": "YOUR_PROJECT",
+    "partition": "vera"
+  },
+  "inputs": {
+    "idf_path": "idf/my_building.idf",
+    "epw_path": "epw/my_weather.epw"
+  },
+  "energyplus": {
+    "install_dir": "EnergyPlus-9.4.0-998c4b761e-Linux-Ubuntu18.04-x86_64"
+  }
+}
