@@ -18,8 +18,11 @@ This work is part of the research project [Renovation strategy support for build
 
 - **Sanjay Somanath** <sanjay.somanath@chalmers.se> - Pipeline development and implementation
 - **Daniele Borraccino** <borraccino1@phd.poliba.it> - Original parametric IDF functions
-- **Alexander Hollberg** <alexander.hollberg@chalmers.se> - Project supervision (Chalmers)
-- **Francesco Fiorito** <francesco.fiorito@poliba.it> - Project supervision (Politecnico di Bari)
+- **Alexander Hollberg** <alexander.hollberg@chalmers.se> - Project supervision and funding (Chalmers)
+
+**Acknowledgements**
+
+We thank **Francesco Fiorito** (<francesco.fiorito@poliba.it>, Politecnico di Bari) for co-supervision and guidance.
 
 **Institutions**
 
