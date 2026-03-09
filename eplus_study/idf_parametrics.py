@@ -83,8 +83,7 @@ def generate_lhs_samples(n_samples, seed=42):
         "vent": (0.0, 0.8, 0.05),
         "misc": (1.0, 6.0, 0.2),
         "shgc": (0.1, 0.9, 0.05),
-        "s_hours": (4, 11, 1),
-        "s_close": (16, 20, 1),
+        "s_hours": (1, 16, 1),
         "cop": (0.65, 0.95, 0.05),
     }
     sampler = qmc.LatinHypercube(d=len(ranges), seed=seed)
@@ -114,15 +113,23 @@ def _translate_hours_to_strings(hours):
     return "06:00", "10:00", f"{evening_stop - (hours - 4):02d}:00", f"{evening_stop}:00"
 
 
-def _translate_shading(hours_open, hour_close):
-    hour_close = int(hour_close)
-    hour_open = hour_close - int(hours_open)
-    return f"{hour_open:02d}:00", f"{hour_close:02d}:00"
+def _translate_shading(hours_duration):
+    """Calculate opening and closing times symmetrical to 14:00."""
+    half_duration = float(hours_duration) / 2
+    start_decimal = 14.0 - half_duration
+    end_decimal = 14.0 + half_duration
+
+    def to_hm(decimal_hour):
+        h = int(decimal_hour)
+        m = int((decimal_hour - h) * 60)
+        return f"{h:02d}:{m:02d}"
+
+    return to_hm(start_decimal), to_hm(end_decimal)
 
 
 def apply_parametric_inputs_to_idf(idf_obj, mapping_df, f_wall, f_roof, f_win,
                                    v_set, v_hours, v_inf, v_vent, v_misc,
-                                   v_cop, v_shgc, v_s_hours, v_s_close):
+                                   v_cop, v_shgc, v_s_hours):
     """Apply one study sample to an IDF object."""
     target_zones = set(
         mapping_df[mapping_df["Cluster"] != "EXCLUDED"]["Zone_Name"].astype(str)
@@ -193,29 +200,38 @@ def apply_parametric_inputs_to_idf(idf_obj, mapping_df, f_wall, f_roof, f_win,
             modified_materials.add(material_name)
 
     shading_controls = idf_obj.idfobjects["WINDOWSHADINGCONTROL"]
-    shading_material = shading_controls[0].Shading_Device_Material_Name if shading_controls else ""
+    shading_schedule_name = "Master_Shading_Availability_S"
+    for existing in [s for s in idf_obj.idfobjects["SCHEDULE:COMPACT"] if s.Name == shading_schedule_name]:
+        idf_obj.removeidfobject(existing)
+    shading_open, shading_close = _translate_shading(v_s_hours)
+    
     shading_schedule = idf_obj.newidfobject(
         "SCHEDULE:COMPACT",
-        Name="Master_Shading_S",
+        Name=shading_schedule_name,
         Schedule_Type_Limits_Name="On/Off",
     )
-    shading_open, shading_close = _translate_shading(v_s_hours, v_s_close)
+
     shading_fields = [
         "Through: 31 Dec",
         "For: AllDays",
-        f"Until: {shading_open}",
-        str(v_shgc),
-        f"Until: {shading_close}",
-        "0.0",
-        "Until: 24:00",
-        str(v_shgc),
+        f"Until: {shading_open}", "0.0",
+        f"Until: {shading_close}", "1.0",
+        "Until: 24:00", "0.0"
     ]
+                                       
     for index, value in enumerate(shading_fields):
         shading_schedule[f"Field_{index + 1}"] = value
+
     for control in shading_controls:
-        control.Schedule_Name = "Master_Shading_S"
+        control.Schedule_Name = shading_schedule_name
         control.Shading_Control_Type = "OnIfScheduleAllows"
-        control.Shading_Device_Material_Name = shading_material
+
+    if shading_controls:
+        mat_name = shading_controls[0].Shading_Device_Material_Name
+        shading_material = idf_obj.getobject("WINDOWMATERIAL:SHADE", mat_name)
+        if shading_material:
+            shading_material.Solar_Transmittance = round(v_shgc, 3)
+            shading_material.Solar_Reflectance = round(1.0 - v_shgc - 0.1, 3)
 
     morning_start, morning_end, evening_start, evening_end = _translate_hours_to_strings(v_hours)
     setpoint_schedule_name = "Master_Heating_Setpoint_S"
